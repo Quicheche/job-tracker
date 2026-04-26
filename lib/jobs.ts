@@ -22,3 +22,10 @@ export function updateJob(id: number, data: Partial<Pick<Job, "status" | "score"
   db.prepare(`UPDATE jobs SET ${fields} WHERE id = @id`).run({ ...data, id });
   return db.prepare("SELECT * FROM jobs WHERE id = ?").get(id) as Job | null;
 }
+
+export function insertIfNew(data: Omit<Job, "id" | "created_at">): "inserted" | "skipped" {
+  const existing = db.prepare("SELECT id FROM jobs WHERE url = ?").get(data.url);
+  if (existing) return "skipped";
+  createJob(data);
+  return "inserted";
+}
