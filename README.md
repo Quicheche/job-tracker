@@ -34,10 +34,6 @@ A personal job discovery and tracking tool focused on backend/SDE roles.
 4. Optionally import selected jobs into the tracker
 5. Update status and notes as you progress
 
-## Why "unseen" instead of "last 24h"
-
-Greenhouse's public API does not reliably expose `posted_at` or `updated_at` timestamps at the job list level. Instead of guessing recency, the app tracks which URLs you've already seen in `localStorage`. A job is "fresh" if you haven't seen it in a previous refresh session.
-
 ## Tech stack
 
 - [Next.js 14](https://nextjs.org/) (App Router)
